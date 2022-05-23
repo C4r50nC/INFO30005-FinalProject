@@ -191,7 +191,7 @@ exports.register = async (req, res) => {
     }
 
     if (await Patient.findOne({ email: body.email })) {
-      throw Error(`Patient's screenName can't be ${body.screenName}, it existed`);
+      throw Error(`Patient's email can't be ${body.email}, it existed`);
     }
 
     if (await Patient.findOne({ screenName: body.screenName })) {
@@ -208,8 +208,11 @@ exports.register = async (req, res) => {
         delete body[key];
       }
     });
+    delete body.confirmPassword;
+    body.password = await bcrypt.hash(body.password, 10);
     const patient = new Patient({
       clinician: id,
+      createdAt: new Date(),
       ...body,
     });
     await patient.save();
