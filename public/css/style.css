@@ -1,0 +1,95 @@
+body {
+  padding-bottom: 100px;
+}
+footer.support-message {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1890ff;
+  color: white;
+  padding: 8px 12px;
+  line-height: 28px;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .navbar.navbar-expand-lg .navbar-toggler ~ .navbar-collapse {
+    order: unset !important;
+  }
+  .navbar.navbar-expand-lg .navbar-toggler ~ .dropdown {
+    order: unset !important;
+  }
+}
+.navbar .navbar-toggler:not(.collapsed) ~ .navbar-collapse {
+  order: 3;
+}
+.navbar .navbar-toggler:not(.collapsed) ~ .dropdown {
+  order: 2;
+}
+.navbar .dropdown-menu[data-bs-popper] {
+  left: unset;
+  right: 0;
+}
+
+.layout-main {
+  padding: 8px 20px;
+}
+.layout-main h1 {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #ff4d4f;
+}
+.success-message {
+  color: green;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+.card label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.engagement-badge {
+  width: 40px;
+  height: 36px;
+  object-fit: cover;
+  vertical-align: -2px;
+}
+
+.history-chart-box {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.history-chart-box canvas {
+  max-width: 600px;
+  max-height: 480px;
+  margin: 0 40px 40px 0;
+}
+
+.patient-detail-box .card {
+  max-width: 800px;
+}
+
+.about-page, .layout-main {
+  max-width: 920px;
+}
+
+.back-anchor {
+  margin-top: 20px;
+  display: block;
+}
+
+.notify-box {
+  color: #ff4d4f;
+}
+
+
+.dark-theme .navbar {
+  color: white;
+}

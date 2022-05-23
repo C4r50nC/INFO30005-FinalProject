@@ -1,0 +1,20 @@
+<h1>View Comments of {{patient.screenName}}</h1>
+
+<div>
+  {{#each comments}}
+    <div class='card'>
+      <div class='card-body'>
+        <div>
+          <p>Comment: {{this.text}}</p>
+          Time: {{this.submittedAt}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+  {{#unless comments.length}}
+  There is no comments of {{patient.screenName}}.
+  {{/unless}}
+</div>
+
+<a href="/clinician/dashboard/{{patient.screenName}}" class="back-anchor">< Back</a>

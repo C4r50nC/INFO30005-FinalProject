@@ -1,0 +1,44 @@
+<h1>Clinician's dashboard of <span class="date">{{date}}</span></h1>
+
+<ul class="notify-box">
+  {{!-- <li>Patient1 enters data of weight outside safety range at time</li> --}}
+</ul>
+
+<table class='table'>
+  <tr>
+    <th>Patient's Name</th>
+    <th>Blood glucose level</th>
+    <th>Weight</th>
+    <th>Doses of insulin taken</th>
+    <th>Exercise</th>
+  </tr>
+
+  {{#each patients}}
+    <tr>
+      <td><a href='/clinician/dashboard/{{screenName}}'>{{screenName}}</a></td>
+      <td
+        {{#if exceedResult.bloodGlucoseLevel}}
+        style='background-color: #ff4d4f;color: white;'
+        {{/if}}
+      >{{bloodGlucoseLevel}}</td>
+      <td
+        {{#if exceedResult.weight}}
+        style='background-color: #ff4d4f;color: white;'
+        {{/if}}
+      >{{weight}}</td>
+      <td
+        {{#if exceedResult.dosesInsulinTaken}}
+        style='background-color: #ff4d4f;color: white;'
+        {{/if}}
+      >{{dosesInsulinTaken}}</td>
+      <td
+        {{#if exceedResult.exercise}}
+        style='background-color: #ff4d4f;color: white;'
+        {{/if}}
+      >{{exercise}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+<script src="/public/js/clinicianHome.js"></script>
+

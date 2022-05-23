@@ -1,0 +1,26 @@
+<div class='history-chart-box'>
+  <canvas id='canvas-bgl'>
+  </canvas>
+
+  <canvas id='canvas-doit'>
+  </canvas>
+
+  <canvas id='canvas-weight'>
+  </canvas>
+
+  <canvas id='canvas-exercise'>
+  </canvas>
+</div>
+
+<script
+  type='text/javascript'
+  src='https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js'
+></script>
+<script src='/public/js/drawHistoryChart.js'></script>
+<script>
+  const dates={{{dates}}}; const data=({{{data}}});
+
+  {{! call function }}
+  draw(dates, data);
+
+</script>

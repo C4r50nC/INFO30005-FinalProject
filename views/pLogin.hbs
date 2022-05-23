@@ -1,0 +1,26 @@
+<h1>Login patient</h1>
+{{#if loginMessage}} <p class="error-message"> {{loginMessage}} </p> {{/if}}
+<form action='/patient/login' method='POST'>
+  <div class='mb-3'>
+    <label class='form-label'>Email address</label>
+    <input
+      type='email'
+      class='form-control'
+      placeholder='enter email'
+      name="email"
+      type="email"
+      required
+    />
+  </div>
+  <div class='mb-3'>
+    <label class='form-label'>Password</label>
+    <input
+      class='form-control'
+      type="password"
+      name="password" 
+      placeholder="enter password"
+      required
+    ></input>
+  </div>
+  <button type="submit" class="btn btn-primary mb-3">Login</button>
+</form>

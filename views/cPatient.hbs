@@ -1,0 +1,232 @@
+<h1>Information of {{patient.screenName}}</h1>
+
+<a href="/clinician/note/{{patient.screenName}}">
+  <button class="btn btn-link mb-3">
+  View Notes</button>
+</a>
+<br/>
+<a href="/clinician/comment/{{patient.screenName}}">
+  <button class="btn btn-link mb-3">
+  View Comments</button>
+</a>
+<br/>
+<a href="/clinician/history/{{patient.screenName}}">
+  <button class="btn btn-link mb-3">
+  View History Data</button>
+</a>
+
+<div class="patient-detail-box">
+<div class='card'>
+  <div class='card-body'>
+    <h5 class='card-title'>Basic Information</h5>
+    <p>
+      <div>
+        <label>Email:</label>
+        <span>{{patient.email}}</span>
+      </div>
+      <div>
+        <label>FirstName:</label>
+        <span>{{patient.firstName}}</span>
+      </div>
+      <div>
+        <label>LastName:</label>
+        <span>{{patient.lastName}}</span>
+      </div>
+    </p>
+  </div>
+</div>
+
+<div class='card'>
+  <div class='card-body'>
+    <h5 class='card-title'>Timeseries</h5>
+    <form action='/clinician/change-timeseries' method='POST'>
+      <input type="hidden" name="patientId" value={{patient._id}} />
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Blood
+          glucose level</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='bloodGlucoseLevel' 
+       {{#if patient.timeSeries.bloodGlucoseLevel}}
+       checked
+       {{/if}} 
+         />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Weight
+          glucose level</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='weight' {{#if patient.timeSeries.weight}}
+       checked
+       {{/if}} />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Exercise</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='dosesInsulinTaken' {{#if patient.timeSeries.exercise}}
+       checked
+       {{/if}} />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Doses of insulin taken</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='exercise' {{#if patient.timeSeries.dosesInsulinTaken}}
+       checked
+       {{/if}} />
+      </div>
+
+      <button type='submit' class="btn btn-primary mb-3" style="margin-top: 20px">Update</button>
+    </form>
+  </div>
+</div>
+
+<div class='card'>
+  <div class='card-body'>
+    <h5 class='card-title'>Support Message</h5>
+    <form action='/clinician/support-message' method='POST'>
+      <input type="hidden" name="patientId" value={{patient._id}} />
+      <textarea
+        class='form-control'
+        placeholder='enter'
+        name="supportMessage"
+      >{{patient.supportMessage}}</textarea>
+      <button type='submit' class="btn btn-primary mb-3" style="margin-top: 20px">Update</button>
+    </form>
+  </div>
+</div>
+
+<div class='card'>
+  <div class='card-body'>
+    <h5 class='card-title'>Safety Limits</h5>
+    <form action='/clinician/safety-limits' method='POST'>
+      <input type="hidden" name="patientId" value={{patient._id}} />
+      
+      
+      {{#with patient.safetyLimits}}
+      <div class='mb-3'>
+        <label class='form-label'>Blood glucose level</label>
+        <div class='form-control'>
+          <div class='mb-3 row'>
+            <label class="col-sm-2 col-form-label">Min: </label>
+            <div class="col-sm-10" style="margin-bottom: 12px;">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="bloodGlucoseLevel.min"
+                style="margin-right: 20px;"
+                value="{{bloodGlucoseLevel.min}}"
+              />
+            </div>
+
+            <label class="col-sm-2 col-form-label">Max: </label>
+            <div class="col-sm-10">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="bloodGlucoseLevel.max"
+                style="margin-right: 20px;"
+                value="{{bloodGlucoseLevel.max}}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>Weight</label>
+        <div class='form-control'>
+          <div class='mb-3 row'>
+            <label class="col-sm-2 col-form-label">Min: </label>
+            <div class="col-sm-10" style="margin-bottom: 12px;">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="weight.min"
+                style="margin-right: 20px;"
+                value="{{weight.min}}"
+              />
+            </div>
+
+            <label class="col-sm-2 col-form-label">Max: </label>
+            <div class="col-sm-10">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="weight.max"
+                style="margin-right: 20px;"
+                value="{{weight.max}}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>Doses of insulin taken</label>
+        <div class='form-control'>
+          <div class='mb-3 row'>
+            <label class="col-sm-2 col-form-label">Min: </label>
+            <div class="col-sm-10" style="margin-bottom: 12px;">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="dosesInsulinTaken.min"
+                style="margin-right: 20px;"
+                value="{{dosesInsulinTaken.min}}"
+              />
+            </div>
+
+            <label class="col-sm-2 col-form-label">Max: </label>
+            <div class="col-sm-10">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="dosesInsulinTaken.max"
+                style="margin-right: 20px;"
+                value="{{dosesInsulinTaken.max}}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>Exercise</label>
+        <div class='form-control'>
+          <div class='mb-3 row'>
+            <label class="col-sm-2 col-form-label">Min: </label>
+            <div class="col-sm-10" style="margin-bottom: 12px;">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="exercise.min"
+                style="margin-right: 20px;"
+                value="{{exercise.min}}"
+              />
+            </div>
+
+            <label class="col-sm-2 col-form-label">Max: </label>
+            <div class="col-sm-10">
+              <input
+                type='number'
+                class='form-control'
+                placeholder='no limit if keeping empty'
+                name="exercise.max"
+                style="margin-right: 20px;"
+                value="{{exercise.max}}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/with}}
+
+      <button type='submit' class="btn btn-primary mb-3" style="margin-top: 20px">Update</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<a href="/clinician/home" class="back-anchor">< Back</a>

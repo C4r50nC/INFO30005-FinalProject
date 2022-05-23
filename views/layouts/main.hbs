@@ -1,0 +1,166 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link
+      rel='stylesheet'
+      href='https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css'
+    />
+    <link
+      href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css'
+      rel='stylesheet'
+      integrity='sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor'
+      crossorigin='anonymous'
+    />
+    <link rel='stylesheet' href='/public/css/style.css' />
+    <title>Diabetes@Home</title>
+  </head>
+  <body
+    {{#ifEquals user.theme 'dark'}}
+    class="dark-theme"
+    {{/ifEquals}}
+  >
+    <nav 
+      {{#unless user}}
+      class='navbar navbar-expand-lg bg-light'
+      {{/unless}}
+
+      {{#ifEquals user.theme 'light'}}
+      class='navbar navbar-expand-lg bg-light'
+      {{/ifEquals}}
+
+      {{#ifEquals user.theme 'dark'}}
+      class='navbar navbar-expand-lg bg-dark navbar-dark'
+      {{/ifEquals}}
+    >
+      <div class='container-fluid'>
+        <button
+          class='navbar-toggler'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#navbarSupportedContent'
+          aria-controls='navbarSupportedContent'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <span class='navbar-toggler-icon'></span>
+        </button>
+
+        <a class='navbar-brand' href=
+        {{#ifEquals user.role 'patient'}}
+        '/patient/home'
+        {{/ifEquals}}
+        {{#ifEquals user.role 'clinician'}}
+        '/clinician/home'
+        {{/ifEquals}}
+
+        {{#unless user}}
+        '/'
+        {{/unless}}
+
+        >Diabetes@Home</a>
+
+        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+          <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+            {{#ifEquals user.role 'patient'}}
+              <li class='nav-item'>
+                <a
+                  class='nav-link'
+                  aria-current='page'
+                  href='/patient/history'
+                >View History
+                </a>
+              </li>
+              <li class='nav-item'>
+                <a class='nav-link' href='/patient/leaderboard'>View Leaderboard</a>
+              </li>
+            {{/ifEquals}}
+            {{#ifEquals user.role 'clinician'}}
+              <li class='nav-item'>
+                <a
+                  class='nav-link'
+                  href='/clinician/register'
+                >Register Patient
+                </a>
+              </li>
+            {{/ifEquals}}
+            <li class='nav-item'>
+              <a class='nav-link' href='/about/diabetes'>About diabetes</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='/about/us'>About this website</a>
+            </li>
+          </ul>
+        </div>
+
+        {{#if user}}
+          <div class='dropdown'>
+            <a
+              class='nav-link dropdown-toggle'
+              href='#'
+              id='navbarDarkDropdownMenuLink'
+              role='button'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
+            >
+              {{{user.screenName}}}
+            </a>
+            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+                
+              {{#ifEquals user.role 'patient'}}
+                <li><a
+                    class='dropdown-item'
+                    href='/patient/change-theme'
+                  >Change theme</a></li>
+                <li><a
+                    class='dropdown-item'
+                    href='/patient/change-password'
+                  >Change Password</a></li>
+                <li>
+                  <form
+                    id='logout'
+                    action='/patient/logout'
+                    method='POST'
+                    style='display: none;'
+                  ></form>
+                  <button class='dropdown-item' form='logout'>Logout</button>
+                </li>
+
+              {{/ifEquals}}
+
+              {{#ifEquals user.role 'clinician'}}
+                <li><a
+                  class='dropdown-item'
+                  href='/clinician/change-theme'
+                >Change theme</a></li>
+                <li>
+                  <form
+                    id='logout'
+                    action='/clinician/logout'
+                    method='POST'
+                    style='display: none;'
+                  ></form>
+                  <button class='dropdown-item' form='logout'>Logout</button>
+                </li>
+
+              {{/ifEquals}}
+            </ul>
+          </div>
+        {{/if}}
+      </div>
+    </nav>
+    <main class='layout-main'>
+      {{{body}}}
+    </main>
+
+    {{#if user.supportMessage}}
+      <footer class='support-message'>{{user.supportMessage}}</footer>
+    {{/if}}
+    <script
+      src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js'
+      integrity='sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2'
+      crossorigin='anonymous'
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<h1>Register Patient</h1>
+{{#if errorMessage}} <p class="error-message"> {{errorMessage}} </p> {{/if}}
+{{#if successMessage}} <p class="success-message"> {{successMessage}} </p> {{/if}}
+<form action='/clinician/register' method='POST'>
+  <div class='mb-3'>
+    <label class='form-label'>Email</label>
+    <input
+      class='form-control'
+      type="email"
+      name="email" 
+      placeholder="enter email"
+      required
+    ></input>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>Password</label>
+    <input
+      class='form-control'
+      type="password"
+      name="password" 
+      placeholder="enter password"
+      required
+    ></input>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>Confirm password</label>
+    <input
+      class='form-control'
+      type="password"
+      name="confirmPassword" 
+      placeholder="confirm password"
+      required
+    ></input>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>First name</label>
+    <input
+      class='form-control'
+      type="input"
+      name="firstName" 
+      placeholder="enter first name"
+      required
+    ></input>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>Last name</label>
+    <input
+      class='form-control'
+      type="input"
+      name="lastName" 
+      placeholder="enter last name"
+      required
+    ></input>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>Screen name</label>
+    <input
+      class='form-control'
+      type="input"
+      name="screenName" 
+      placeholder="enter screen name"
+      required
+    ></input>
+  </div>
+
+<div class='card'>
+  <div class='card-body'>
+    <h5 class='card-title'>Timeseries</h5>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Blood
+          glucose level</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='timeSeries.bloodGlucoseLevel' 
+       {{#if patient.timeSeries.bloodGlucoseLevel}}
+       checked
+       {{/if}} 
+         />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Weight
+          glucose level</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='timeSeries.weight' {{#if patient.timeSeries.weight}}
+       checked
+       {{/if}} />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Exercise</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='timeSeries.dosesInsulinTaken' {{#if patient.timeSeries.exercise}}
+       checked
+       {{/if}} />
+      </div>
+      <div class='form-check form-switch'>
+        <label class='form-check-label' for='flexSwitchCheckDefault'>Doses of insulin taken</label>
+        <input class='form-check-input' type='checkbox' role='switch' name='timeSeries.exercise' {{#if patient.timeSeries.dosesInsulinTaken}}
+       checked
+       {{/if}} />
+      </div>
+  </div>
+</div>
+
+  <button type="submit" class="btn btn-primary mb-3">Submit</button>
+</form>

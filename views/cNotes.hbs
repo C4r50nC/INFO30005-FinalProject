@@ -1,0 +1,37 @@
+<h1>
+  Viewing notes of
+  {{patient.screenName}}
+</h1>
+<div>
+  <h2>Add a new note</h2>
+  <form id='noteForm' action='/clinician/note' method='POST'>
+    <input type='hidden' name='patientId' value='{{patient._id}}' />
+    <textarea name='note' row='10' column='30' class='form-control'></textarea>
+    <button type='submit' class='btn btn-primary mb-3' style='margin-top: 20px'>
+      Create a new note
+    </button>
+  </form>
+</div>
+
+<div>
+  <h2>Viewing notes</h2>
+  {{#each patient.notes}}
+    <div class='card'>
+      <div class='card-body'>
+        <div>
+          Note:
+          {{this.text}}
+          <br />
+          Time:
+          {{this.createdAt}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+  {{#unless patient.notes.length}}
+  There is no notes of {{patient.screenName}}.
+  {{/unless}}
+</div>
+
+<a href="/clinician/dashboard/{{patient.screenName}}" class="back-anchor">< Back</a>

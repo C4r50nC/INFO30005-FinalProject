@@ -1,0 +1,81 @@
+<div>
+  <h1>
+    {{#if showBadge}}
+    <img src="/public/imgs/badge.png" class="engagement-badge"></img>
+    {{/if}}
+    Recorded Data in
+    {{date}}
+  </h1>
+
+  {{#each records}}
+    {{#ifEquals status 'recorded'}}
+      <div class='card' style='max-width: 800px'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{fullName}}</h5>
+          <div>
+            <label>Status:</label>
+            <span style='color: #73d13d'>{{status}}</span>
+          </div>
+          <div>
+            <label>Value: </label>
+            <span>{{value}}</span>
+          </div>
+          <div>
+            <label>Comment: </label>
+            <span>{{comment}}</span>
+          </div>
+          <div>
+            <label>Submitted at: </label>
+            <span>{{submittedAt}}</span>
+          </div>
+        </div>
+      </div>
+    {{/ifEquals}}
+    {{#ifEquals status 'unrecorded'}}
+      <div class='card' style='max-width: 800px'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{fullName}}</h5>
+          <div style='margin-bottom: 12px;'>
+            <label>Status:</label>
+            <span style='color: #ff4d4f'>{{status}}</span>
+          </div>
+          <form action='/patient/record-data' method='POST'>
+            <input type='hidden' name='key' value='{{key}}' />
+            <input type='hidden' name='recordDate' value='{{date}}' />
+            <div class='mb-3'>
+              <label class='form-label'>Value</label>
+              <input
+                type='number'
+                class='form-control'
+                placeholder='enter value'
+                name='value'
+                required
+              />
+            </div>
+            <div class='mb-3'>
+              <label class='form-label'>Comment</label>
+              <textarea
+                class='form-control'
+                name='comment'
+                placeholder='enter comment'
+              ></textarea>
+            </div>
+            <button type='submit' class='btn btn-primary mb-3'>Submit</button>
+          </form>
+        </div>
+      </div>
+    {{/ifEquals}}
+    {{#ifEquals status 'no need'}}
+      <div class='card' style='max-width: 800px'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{fullName}}</h5>
+          <div>
+            <label>Status:</label>
+            <span style='color: #8c8c8c'>{{status}}</span>
+          </div>
+        </div>
+      </div>
+    {{/ifEquals}}
+  {{/each}}
+
+</div>

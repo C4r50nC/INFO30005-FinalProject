@@ -1,0 +1,28 @@
+<h1>Change Theme</h1>
+{{#if message}} <p class="success-message"> {{message}} </p> {{/if}}
+<form action='/clinician/change-theme' method='POST'>
+  <div class='mb-3'>
+    <label class='form-label'>Theme</label>
+    <div class='form-check'>
+      <input class='form-check-input' type='radio' name='theme' value='light' 
+      {{#ifEquals theme 'light'}}
+        checked
+      {{/ifEquals}}
+      />
+      <label class='form-check-label'>
+        Light
+      </label>
+    </div>
+    <div class='form-check'>
+      <input class='form-check-input' type='radio' name='theme' value='dark'
+      {{#ifEquals theme 'dark'}}
+        checked
+      {{/ifEquals}}
+      />
+      <label class='form-check-label'>
+        Dark
+      </label>
+    </div>
+  </div>
+  <button type='submit' class='btn btn-primary mb-3'>Submit</button>
+</form>
